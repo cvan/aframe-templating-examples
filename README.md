@@ -8,7 +8,8 @@ through a single prefabricated tree template.
 
 We will demonstrate:
 
-- Handlebars
-- Mustache
+- Handlebars.js
+- mustache.js
+- Fetching external templates
 
 ![Forest](https://cloud.githubusercontent.com/assets/674727/13195386/beb3d8fe-d765-11e5-9b1a-a982c1e7cf36.png)
