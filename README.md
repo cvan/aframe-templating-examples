@@ -10,7 +10,5 @@ We will demonstrate:
 
 - Handlebars
 - Mustache
-- Underscore
-- React
 
 ![Forest](https://cloud.githubusercontent.com/assets/674727/13195386/beb3d8fe-d765-11e5-9b1a-a982c1e7cf36.png)
