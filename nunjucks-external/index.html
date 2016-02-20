@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A-Frame + Nunjucks + External</title>
+    <script src="aframe-v1.0.0-beta.min.js"></script>
+    <script src="nunjucks-v2.3.0.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-mixin id="leaf-block"
+                 geometry="primitive: box; depth: 2.5; height: 2.5; width: 2.5"
+                 material="color: #69C181; side: double"></a-mixin>
+      </a-assets>
+
+      <a-camera position="25 1.8 25"></a-camera>
+      <a-plane color="#CAAD8C" height="500" width="500" shader="flat"
+               position="0 -10 0" rotation="-90 0 0"></a-plane>
+      <a-sky color="#3EC1D3"></a-sky>
+    </a-scene>
+
+    <script>
+      // Fetch the external template.
+      var scene = document.querySelector('a-scene');
+      var request = new XMLHttpRequest();
+      request.addEventListener('load', treeLoaded);
+      request.open('GET', 'tree.template');
+      request.send();
+
+      function treeLoaded () {
+        // Compile the fetched template.
+        var treeTemplateStr = request.response;
+        var treeTemplate = nunjucks.compile(treeTemplateStr);
+
+        // Use the template 100 times in a loop.
+        for (var x = 0; x < 100; x += 10) {
+          for (var z = 0; z < 100; z += 10) {
+            // Render the tree template into the scene, passing in the position.
+            var treeEntityStr = treeTemplate.render({
+              trunkColor: '#623B1C',
+              position: x + ' 0 ' + z
+            });
+            scene.insertAdjacentHTML('beforeend', treeEntityStr);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
